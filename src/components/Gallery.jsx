@@ -10,49 +10,96 @@ const Gallery = () => {
   const [layout, setLayout] = useState(gridLayout);
   console.log(layout[layout.length-1]);
 
+//   const handleCheckboxChange = (url) => {
+//     console.log(selectedImages.includes(url));
+//     if (selectedImages.includes(url)) {
+//       console.log(url);
+//       setSelectedImages(
+//         selectedImages.filter((selectedUrl) => selectedUrl !== url)
+//       );
+//     } else {
+//       setSelectedImages([...selectedImages, url]);
+//     }
+//   };
+
+//   const handleDeleteClick = () => {
+//     console.log("working");
+//     const updatedImages = images.filter(
+//       (image) => !selectedImages.includes(image)
+//     );
+//     setImages(updatedImages);
+//     setSelectedImages([]); // Clear the selected images
+//   };
+
+  const handleImageUpload = (event) => {
+    const uploadedImage = event.target.files[0];
+
+    if (uploadedImage) {
+      const imageObject = {
+        id: `image${images.length + 1}`,
+        src: URL.createObjectURL(uploadedImage),
+        file: uploadedImage,
+      };
+
+      setImages([...images, imageObject]);
+
+      let lastItem = layout[layout.length - 2].x;
+      if(lastItem <4) {
+        lastItem = lastItem + 1;
+      }else{
+        lastItem = 0;
+      }
+
+      const newItemLayout = {
+        i: imageObject.id,
+        x: lastItem,
+        y: 2,
+        w: 1,
+        h: 1,
+      };
+
+      setLayout([...layout, newItemLayout]);
+    }
+  };
+
   const onLayoutChange = (newLayout) => {
     setLayout(newLayout);
   };
 
   return (
-    <div className="bg-gray-100 container mx-auto">
-        <h1 className="text-5xl font-semibold text-center uppercase">Responsive Image Gallery</h1>
+    <div className="bg-gray-100 w-4/5 mx-auto my-3 p-16">
       <div className="flex justify-between px-10">
         <h2>{selectedImages.length}</h2>
         <button
-         
           className="bg-red-500 text-white p-2 rounded-lg"
         >
           Delete
         </button>
       </div>
-      <div className="">
+      <div className="mx-auto">
         <GridLayout
-          className="layout mx-auto"
+          className="layout"
           layout={layout}
           cols={5}
           preventCollision={false}
-          rowHeight={200}
-          width={1200}
+          rowHeight={120}
+          width={800}
           onLayoutChange={onLayoutChange}
         >
           {images.map((image) => (
             <div
               key={image.id}
-              className="image-item relative border"
+              className="relative border rounded-md w-[110px] h-[110px]"
             >
               <img
                 src={image.src}
                 alt={image.id}
-                className={`w-full h-full object-cover hover:opacity-0 ${
-                  image.id === "featured" ? "featured" : ""
-                }`}
+                className="rounded-md w-full h-full"
               />
               <input
                 type="checkbox"
                 checked={selectedImages.includes(image)}
-              
-                className="absolute w-6 h-6 top-2 left-2"
+                className="absolute top-5 left-5 w-4 h-4"
               />
             </div>
           ))}
@@ -66,7 +113,7 @@ const Gallery = () => {
                 id="fileInput"
                 accept="image/*"
                 style={{ display: "none" }}
-               
+                onChange={handleImageUpload}
               />
               <span>Upload Image</span>
             </label>

@@ -9,7 +9,7 @@ export const gridLayout = [
       isBounded: true,
     }, // Featured image
     { i: "image1", x: 2, y: 2, w: 1, h: 1 },
-    { i: "image2", x: 3, y: 2, w: 1, h: 1 },
+    { i: "image2", x: 3, y: 3, w: 1, h: 1 },
     { i: "image3", x: 4, y: 2, w: 1, h: 1 },
     { i: "image4", x: 2, y: 2, w: 1, h: 1 },
     { i: "image5", x: 3, y: 2, w: 1, h: 1 },
