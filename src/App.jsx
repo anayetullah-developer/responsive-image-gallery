@@ -1,8 +1,10 @@
+import Gallery from "./components/Gallery"
+
 function App() {
 
   return (
     <>
-      <h1>This is heading</h1>
+     <Gallery/>
     </>
   )
 }
