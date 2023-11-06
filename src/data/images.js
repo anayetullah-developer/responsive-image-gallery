@@ -1,46 +1,47 @@
 export const imagesData = [
   {
     id: "featured-image",
-    src: "/src/assets/images/image-1.webp",
+    src: "https://i.ibb.co/rQ5G6FW/image-11.jpg",
   },
   {
     id: "image1",
-    src: "/src/assets/images/image-2.webp",
+    src: "https://i.ibb.co/6ZyvWP5/image-one.webp",
   },
   {
     id: "image2",
-    src: "/src/assets/images/image-3.webp",
+    src: "https://i.ibb.co/cr61CzS/image-two.webp",
   },
   {
     id: "image3",
-    src: "/src/assets/images/image-4.webp",
+    src: "https://i.ibb.co/JrM8TY6/image-three.webp",
   },
   {
     id: "image4",
-    src: "/src/assets/images/image-5.webp",
+    src: "https://i.ibb.co/m6d8Ydm/image-four.webp",
   },
   {
     id: "image5",
-    src: "/src/assets/images/image-6.webp",
+    src: "https://i.ibb.co/BCY40fV/image-five.webp",
   },
   {
     id: "image6",
-    src: "/src/assets/images/image-7.webp",
+    src: "https://i.ibb.co/x62m94v/image-six.webp",
   },
   {
     id: "image7",
-    src: "/src/assets/images/image-8.webp",
+    src: "https://i.ibb.co/hWkH53v/image-seven.webp",
   },
   {
     id: "image8",
-    src: "/src/assets/images/image-9.webp",
+    src: "https://i.ibb.co/VSnVfKv/image-eight.webp",
   },
   {
     id: "image9",
-    src: "/src/assets/images/image-10.jpeg",
+    src: "https://i.ibb.co/Cmjnnhp/image-nine.webp",
   },
   {
     id: "image10",
-    src: "/src/assets/images/image-11.jpeg",
+    src: "https://i.ibb.co/X46sty5/image-ten.jpg",
   },
 ];
+
