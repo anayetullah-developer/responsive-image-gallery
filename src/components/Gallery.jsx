@@ -29,9 +29,43 @@ const Gallery = () => {
     }
   };
 
+  //Function for deleting selected items
+  const deleteSelectedItems = () => {
+    // Filter out the selected items from the list
+    const updatedItems = items.filter(
+      (_, index) => !selectedItems.includes(index)
+    );
+    setItems(updatedItems);
+
+    // Clear the selected items
+    setSelectedItems([]);
+  };
+
   return (
     <div className="bg-[#EBEFF5] min-h-screen w-screen flex items-center justify-center">
       <div className="lg:w-1/2 md:w-3/4 w-full p-4 rounded-lg shadow bg-white">
+        <div className="flex justify-between items-center mb-5">
+          <div>
+            {selectedItems.length > 0 ? (
+              <span className="text-xl font-bold">
+                {selectedItems.length}{" "}
+                {selectedItems.length === 1 ? "file" : "files"} selected
+              </span>
+            ) : (
+              <span className="text-xl font-bold">Gallery</span>
+            )}
+          </div>
+          <div>
+            {selectedItems.length > 0 && (
+              <button
+                className="text-red-500 text-lg p-2 rounded-lg font-bold"
+                onClick={deleteSelectedItems}
+              >
+                Delete Files
+              </button>
+            )}
+          </div>
+        </div>
         <div className="grid lg:grid-cols-5 md:grid-cols-4 grid-cols-2  gap-4 md:gap-6">
           {items.map((item, index) => (
             <div
@@ -40,17 +74,15 @@ const Gallery = () => {
                 index === 0 ? "col-span-2 row-span-2" : ""
               }`}
             >
-              <label
-                htmlFor={`checkbox-${index}`}
-              >
+              <label htmlFor={`checkbox-${index}`}>
                 <input
                   type="checkbox"
                   id={`checkbox-${index}`}
-                  className={"absolute top-4 left-4 h-5 w-5 cursor-pointer accent-blue-500 group-hover:opacity-100"+ " " + (
-                    selectedItems.length > 0 
-                      ? "opacity-100"
-                      : "opacity-0"
-                  )}
+                  className={
+                    "absolute top-4 left-4 h-5 w-5 cursor-pointer accent-blue-500 group-hover:opacity-100" +
+                    " " +
+                    (selectedItems.length > 0 ? "opacity-100" : "opacity-0")
+                  }
                   checked={selectedItems.includes(index)}
                   onChange={() => toggleCheckbox(index)}
                 />
