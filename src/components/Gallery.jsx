@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { imagesData } from "../data/images";
 
 const Gallery = () => {
   const [items, setItems] = useState(imagesData);
   const [selectedItems, setSelectedItems] = useState([]);
+
+  const dragItem = useRef();
+  const dragOverItem = useRef();
 
   // Function for uploading new image
   const handleUpload = (e) => {
@@ -29,16 +32,34 @@ const Gallery = () => {
     }
   };
 
-  //Function for deleting selected items
+  // Function for deleting selected items
   const deleteSelectedItems = () => {
-    // Filter out the selected items from the list
     const updatedItems = items.filter(
       (_, index) => !selectedItems.includes(index)
     );
     setItems(updatedItems);
-
-    // Clear the selected items
     setSelectedItems([]);
+  };
+
+  //Function when drag is started
+  const dragStart = (e, position) => {
+    dragItem.current = position;
+  };
+
+  //Function when drag is entered
+  const dragEnter = (e, position) => {
+    dragOverItem.current = position;
+  };
+
+  // Function when draggable item is dropped
+  const drop = () => {
+    const copyListItems = [...items];
+    const dragItemContent = copyListItems[dragItem.current];
+    copyListItems.splice(dragItem.current, 1);
+    copyListItems.splice(dragOverItem.current, 0, dragItemContent);
+    dragItem.current = null;
+    dragOverItem.current = null;
+    setItems(copyListItems);
   };
 
   return (
@@ -73,6 +94,10 @@ const Gallery = () => {
               className={`relative draggable group cursor-grab ${
                 index === 0 ? "col-span-2 row-span-2" : ""
               }`}
+              draggable
+              onDragStart={(e) => dragStart(e, index)}
+              onDragEnter={(e) => dragEnter(e, index)}
+              onDragEnd={drop}
             >
               <label htmlFor={`checkbox-${index}`}>
                 <input
@@ -91,7 +116,7 @@ const Gallery = () => {
               <img
                 src={item.link}
                 alt=""
-                className="object-cover border rounded-md "
+                className="object-cover border rounded-md w-full h-full"
               />
             </div>
           ))}
